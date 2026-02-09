@@ -6,7 +6,7 @@ Implementation Guide \- EV Charging \- Version 0.8 (DRAFT) <!-- omit from toc --
 - [1. Request for Comments](#1-request-for-comments)
 - [2. Copyright Notice](#2-copyright-notice)
 - [3. Status of This Memo](#3-status-of-this-memo)
-- &bs[4. Overview](#4-overview)
+- [4. Overview](#4-overview)
 - [5. Introduction](#5-introduction)
 - [6. Scope](#6-scope)
 - [7. Intended Audience](#7-intended-audience)
@@ -119,17 +119,17 @@ Example jsons were imported directly from source of truth elsewhere in this repo
 ``` 
 
 
-# 1. Request for Comments
+# 1. Request for Comments {#1-request-for-comments}
 
-# 2. Copyright Notice
+# 2. Copyright Notice {#2-copyright-notice}
 
 **License: [CC-BY-NC-SA 4.0](https://becknprotocol.io/license/) becknprotocol.io**
 
-# 3. Status of This Memo
+# 3. Status of This Memo {#3-status-of-this-memo}
 
 **This is a draft RFC for implementing EV charging use cases using the Beckn Protocol. It provides implementation guidance for anyone to build interoperable EV charging applications that integrate with each other on a decentralized network while maintaining compatibility with OCPI standards for CPO communication.**
 
-## 4. Overview
+## 4. Overview {#4-overview}
 
 This document proposes a practical way to make EV charging services easier to find and use by applying the Beckn Protocol’s distributed commerce model. Instead of juggling multiple apps and accounts for different charging networks, EV users on any Beckn protocol-enabled consumer platform (a.k.a BAPs) – can discover and book charging services from Beckn protocol-enabled provider platforms (a.k.a BPPs) that have onboarded one or more Charge Point Operators (CPOs).
 
@@ -137,11 +137,11 @@ EV users can discover, compare options, view transparent pricing, and reserve a 
 
 Built on Beckn’s commerce capabilities and aligned with OCPI for technical interoperability, the implementation lets e-Mobility Service Providers (eMSPs) aggregate services from multiple CPOs while delivering a consistent, app-agnostic experience to consumers. 
 
-# 5. Introduction
+# 5. Introduction {#5-introduction}
 
 This document provides an implementation guidance for deploying EV charging services using the Beckn Protocol ecosystem. It specifically addresses how consumer applications can provide unified access to charging infrastructure across multiple Charge Point Operators while maintaining technical compatibility with existing OCPI-based systems.
 
-# 6. Scope
+# 6. Scope {#6-scope}
 
 This document covers:
 
@@ -158,7 +158,7 @@ This document does NOT cover:
 * Regulatory compliance beyond technical implementation (varies by jurisdiction)  
 * Smart grid integration and load management systems
 
-# 7. Intended Audience
+# 7. Intended Audience {#7-intended-audience}
 
 * Consumer Application Developers (BAPs): Building EV driver-facing charging applications with unified cross-network access  
 * e-Mobility Service Providers (eMSPs/BPPs): Implementing charging service aggregation platforms across multiple CPO networks  
@@ -168,11 +168,11 @@ This document does NOT cover:
 * Business Stakeholders: Understanding technical capabilities and implementation requirements for EV charging marketplace strategies  
 * Standards Organizations: Evaluating interoperability approaches for future EV charging standards development
 
-# 8. Conventions and Terminology
+# 8. Conventions and Terminology {#8-conventions-and-terminology}
 
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described [here](https://github.com/beckn/protocol-specifications/blob/draft/docs/BECKN-010-Keyword-Definitions-for-Technical-Specifications.md).
 
-# 9. Terminology
+# 9. Terminology {#9-terminology}
 
 | Acronym | Full Form/Description             | Description                                                                                                           |
 | ------- | --------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
@@ -190,15 +190,15 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "S
 > BPPs are NOT aggregators. Any CPO that has implemented a Beckn Protocol endpoint is a BPP. 
 > For all sense and purposes, CPOs are essentially BPPs and eMSPs are essentially BAPs.
 
-# 10. Reference Architecture
+# 10. Reference Architecture {#10-reference-architecture}
 
 The section defines the reference ecosystem architecture that is used for building this implementation guide. 
 
-## 10.1. Architecture Diagram
+## 10.1. Architecture Diagram {#101-architecture-diagram}
 
 ![](../assets/beckn-one-deg-arch.png)
 
-## 10.2. Actors
+## 10.2. Actors {#102-actors}
 
 1. Beckn One Global Root Registry  
 2. Beckn One Catalog Discovery Service  
@@ -206,11 +206,11 @@ The section defines the reference ecosystem architecture that is used for buildi
 4. Beckn Provider Platforms  
 5. EV Charging Registry
 
-# 11. Creating an Open Network for EV Charging
+# 11. Creating an Open Network for EV Charging {#11-creating-an-open-network-for-ev-charging}
 
 To create an open network for EV charging requires all the EV charging BAPs, BPPs, to be able to discover each other and become part of a common club. This club is manifested in the form of a Registry maintained by an NFO. 
 
-## 11.1. Setting up a Registry
+## 11.1. Setting up a Registry {#111-setting-up-a-registry}
 
 The NP Registry serves as the root of addressability and trust for all network participants. It maintains comprehensive details such as the participant’s globally unique identifier (ID), network address (Beckn API URL), public key, operational domains, and assigned role (e.g., BAP, BPP, CDS). In addition to managing participant registration, authentication, authorization, and permission control, the Registry oversees participant verification, activation, and overall lifecycle management, ensuring that only validated and authorized entities can operate within the network.
 
@@ -218,39 +218,39 @@ The NP Registry serves as the root of addressability and trust for all network p
 
 You can publish your registries at [DeDi.global](https://publish.dedi.global/).
 
-### 11.1.1. For a Network Participant
+### 11.1.1. For a Network Participant {#1111-for-a-network-participant}
 
-#### 11.1.1.1. Step 1 :  Claiming a Namespace
+#### 11.1.1.1. Step 1 :  Claiming a Namespace {#11111-step-1---claiming-a-namespace}
 
 To get started, any platform that has implemented Beckn Protocol MUST create a globally unique namespace for themselves.   
 All NPs (BAPs, BPPs, CDS’es) **MUST** register as a user on dedi.global and claim a unique namespace against their FQDN to become globally addressable. As part of the claiming process, the user must prove ownership of the namespace by verifying the ownership of their domain. Namespace would be at an organisation level. You can put your organisation name as the name of the namespace.
 
-#### 11.1.1.2. Step 2 :  Setting up a Registry
+#### 11.1.1.2. Step 2 :  Setting up a Registry {#11112-step-2---setting-up-a-registry}
 
 Once the namespace is claimed, each NP **MUST** create a Beckn NP registry in the namespace to list their subscriber details. While creating the registry, the user **MUST** configure it with the [subscriber schema](https://gist.githubusercontent.com/nirmalnr/a6e5b17522169ecea4f3ccdd831af7e4/raw/7744f2542034db9675901b61b41c8228ea239074/beckn-subscriber-no-refs.schema.json). Example of a registry name can be `subscription-details`.
 
-#### 11.1.1.3. Step 3 :  Publishing subscriber details
+#### 11.1.1.3. Step 3 :  Publishing subscriber details {#11113-step-3---publishing-subscriber-details}
 
 In the registry that is created, NPs **MUST** publish their subscription details including their ID, network endpoints, public keys, operational domains and assigned roles (BAP, BPP) as records.
 
 *Detailed steps to create namespaces and registries in dedi.global can be found [here](https://github.com/dedi-global/docs/blob/0976607aabc6641d330a3d41a3bd89ab8790ea09/user-guides/namespace%20and%20registry%20creation.md).*
 
-### 11.1.2. Step 4 :  Share details of the registry created with the Beckn One team
+### 11.1.2. Step 4 :  Share details of the registry created with the Beckn One team {#1112-step-4---share-details-of-the-registry-created-with-the-beckn-one-team}
 
 Once the registry is created and details are published, the namespace and the registry name of the newly created registry should be shared with the beckn one team.
 
-### 11.1.3. For a Network facilitator organization
+### 11.1.3. For a Network facilitator organization {#1113-for-a-network-facilitator-organization}
 
-#### 11.1.3.1. Step 1 :  Claiming a Namespace
+#### 11.1.3.1. Step 1 :  Claiming a Namespace {#11131-step-1---claiming-a-namespace}
 
 An NFO **MAY** register as a user on dedi.global and claim a unique namespace against their FQDN. As part of the claiming process, the user must prove ownership of that namespace by verifying the ownership of that domain. The NFO name can be set as the name of the namespace. 
 *Note: A calibrated roll out of this infrastructure is planned and hence before it is open to the general public NFOs are advised to share their own domain and the domains of their NPs to the Beckn One team so that they can be whitelisted which will allow the NPs to verify the same using TXT records in their DNS.*
 
-#### 11.1.3.2. Step 2 :  Setting up a Registry
+#### 11.1.3.2. Step 2 :  Setting up a Registry {#11132-step-2---setting-up-a-registry}
 
 Network facilitators **MAY** create registries under their own namespace using the [subscriber reference schema](https://gist.githubusercontent.com/nirmalnr/a6e5b17522169ecea4f3ccdd831af7e4/raw/b7cf8a47e6531ef22744b43e6305b8d8cc106e7b/beckn-subscriber-reference.schema.json) to point to either whole registries or records created by the NPs in their own namespaces.  Example of a registry name can be `subscription-details`.
 
-#### 11.1.3.3. Step 3 :  Publishing subscriber details
+#### 11.1.3.3. Step 3 :  Publishing subscriber details {#11133-step-3---publishing-subscriber-details}
 
 In the registry that is created, NFOs **MAY** publish records which act as pointers to either whole registries or records created by the NPs records. The URL field in the record would be the lookup URL for a registry or a record as per DeDi protocol.
 
@@ -280,11 +280,11 @@ Here `energy-bap` is the name of the record created by the NP in this registry. 
 
 *Detailed steps to create namespaces and registries in dedi.global can be found [here](https://github.com/dedi-global/docs/blob/0976607aabc6641d330a3d41a3bd89ab8790ea09/user-guides/namespace%20and%20registry%20creation.md).*
 
-#### 11.1.3.4. Step 4 :  Share details of the registry created with the Beckn One team
+#### 11.1.3.4. Step 4 :  Share details of the registry created with the Beckn One team {#11134-step-4---share-details-of-the-registry-created-with-the-beckn-one-team}
 
 Once the registry is created and details are published, the namespace and the registry name of the newly created registry should be shared with the beckn one team.
 
-## 11.2. Setting up the Protocol Endpoints
+## 11.2. Setting up the Protocol Endpoints {#112-setting-up-the-protocol-endpoints}
 
 This section contains instructions to set up and test the protocol stack for EV charging transactions. 
 
@@ -319,18 +319,18 @@ If you are a BPP
 2. Select the on_status example and hit send
 3. You should see the response in your console
 
-# 12. Implementing EV Charging Semantics on Beckn Protocol
+# 12. Implementing EV Charging Semantics on Beckn Protocol {#12-implementing-ev-charging-semantics-on-beckn-protocol}
 
 This section contains recommendations and guidelines on how to implement EV Charging Services on Beckn Protocol enabled networks. To ensure global interoperability between actors of the EV charging network, the semantics of the EV charging industry need to be mapped to the core schema of Beckn Protocol. The below table summarizes key semantic mappings between the EV Charging Domain and Beckn Protocol domain.
 
-## 12.1. Key Assumptions
+## 12.1. Key Assumptions {#121-key-assumptions}
 
 - **Assumption 1 :** EV charging is treated as a service, not as a physical object.  
 - **Assumption 2:** All CPOs have implemented OCPI interfaces 
 
 Each entity in the charging lifecycle — the service, the commercial terms, and the usage instance — maps to a well-defined semantic concept, enabling platforms to exchange information in a standardized, machine-readable way.
 
-## 12.2. Semantic Model
+## 12.2. Semantic Model {#122-semantic-model}
 
 | EV Charging Domain Entity | Charging Example                                                                       |                                                    Semantically maps to                                                     |
 | ------------------------- | -------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------: |
@@ -338,7 +338,7 @@ Each entity in the charging lifecycle — the service, the commercial terms, and
 | Charging service          | “₹18 per kWh”, “₹150 per hour”, “₹999 monthly pass”, “Off-peak discount 2 AM–5 AM”     |  [Offer](https://github.com/beckn/protocol-specifications-new/tree/main/schema/EvChargingOffer/v1/attributes.yaml)  |
 | Charging Session          | A specific booking or usage instance created when the user plugs in or reserves a slot | [Order](https://github.com/beckn/protocol-specifications-new/tree/main/schema/EvChargingSession/v1/attributes.yaml) |
 
-## 12.3. Example Category Codes
+## 12.3. Example Category Codes {#123-example-category-codes}
 
 The following section contains example category codes that can be 
 
@@ -373,5 +373,5 @@ Service types
 | REMOTE\_START\_STOP      | Remote start/stop of sessions exposed via roaming interface (OCPI Commands module).                                            |
 
 
-# 13. Example Workflows (EV User’s Perspective)
+# 13. Example Workflows (EV User’s Perspective) {#13-example-workflows-ev-users-perspective}
 

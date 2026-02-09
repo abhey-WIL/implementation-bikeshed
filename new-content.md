@@ -1,7 +1,9 @@
-### 11.1. User Story – 1 - Walk-In to a charging station without reservation
+## 11.1. User Story – 1 - Walk-In to a charging station without reservation
+<span id="131-example-1---walk-in-to-a-charging-station-without-reservation"></span>
 This section covers a walk-in case where users discover the charger using third-party apps, word of mouth, or Beckn API, and then drive to the location, plug in their EV and charge their vehicle.
 
-#### 11.1.1. Consumer User Journey
+### 11.1.1. Consumer User Journey
+<span id="1311-consumer-user-journey"></span>
 A sales manager, Arjun, drives an EV to client meetings. He's time-bound, cost-conscious, and prefers simple, scan-and-go experiences. Arjun arrives at a large dine-in restaurant for a one-hour client meeting. He notices a charging bay in the parking lot and decides to top up while he's inside.
 
 **Discovery and Selection:**
@@ -43,11 +45,34 @@ The charging session will terminate when the ₹450.00 cost limit is reached, or
     * It initiates an automatic refund/adjustment (e.g., ₹125.00) from the initial ₹450.00 authorization hold back to Arjun's UPI source, ensuring he is billed only for the energy actually consumed.
 
 #### 11.1.2. API Calls and Schema
+<span id="1312-api-calls-and-schema"></span>
+<span id="13121-action-discover"></span>
+<span id="13122-action-on_discover"></span>
+<span id="13123-action-select"></span>
+<span id="13124-action-on_select"></span>
+<span id="13125-action-init"></span>
+<span id="13126-action-on_init"></span>
+<span id="13127-131261-action-on_status"></span>
+<span id="13128-action-confirm"></span>
+<span id="13129-action-on_confirm"></span>
+<span id="131210-action-status"></span>
+<span id="131211-action-on_status"></span>
+<span id="131212-action-update-start-charging"></span>
+<span id="131213-action-on_update-start-charging"></span>
+<span id="131214-action-status-charging-session-progress"></span>
+<span id="131215-action-on_status"></span>
+<span id="131216-async-action-on_status"></span>
+<span id="131217-action-on_update-stop-charging"></span>
+<span id="131218-async-action-on_update-stop-charging"></span>
+<span id="131219-action-rating"></span>
+<span id="131220-action-on_rating"></span>
+<span id="131221-action-support"></span>
+<span id="131222-action-on_support"></span>
 *Note: The API calls and schema for walk-in charging are identical to the advance reservation use case with minor differences in timing and availability. Where sections reference Use Case 2, the same API structure, field definitions, and examples apply unless specifically noted otherwise.*
 
 **11.1.2.1. action: discover**
-* **Method:** POST
-* **Use Cases:** Arjun scans QR code on charger using his BAP user app.
+**Method:** POST
+**Use Cases:** Arjun scans QR code on charger using his BAP user app.
 <details>
 <summary><a href="../Example-schemas/01_discover/discovery-by-QR.json">Example json :rocket:</a></summary>
 
@@ -79,8 +104,8 @@ The charging session will terminate when the ₹450.00 cost limit is reached, or
 </details>
 
 **11.1.2.2. action: on_discover**
-* **Method:** POST
-* **Use Cases:** The app receives the charger's details (connector, power rating, live status, tariff, any active time-bound offer).
+**Method:** POST
+**Use Cases:** The app receives the charger's details (connector, power rating, live status, tariff, any active time-bound offer).
 <details>
 <summary><a href="../Example-schemas/02_on_discover/specific-item-catalog.json">Example json :rocket:</a></summary>
 
@@ -291,8 +316,8 @@ The charging session will terminate when the ₹450.00 cost limit is reached, or
 </details>
 
 **11.1.2.3. action: select**
-* **Method:** POST
-* **Use Cases:** Arjun selects a service offering from the options he gets. He chooses a 100 INR top-up.
+**Method:** POST
+**Use Cases:** Arjun selects a service offering from the options he gets. He chooses a 100 INR top-up.
 <details>
 <summary><a href="../Example-schemas/03_select/ev-charging-select.json">Example json :rocket:</a></summary>
 
@@ -375,8 +400,8 @@ The charging session will terminate when the ₹450.00 cost limit is reached, or
 </details>
 
 **11.1.2.4. action: on_select**
-* **Method:** POST
-* **Use Cases:** Arjun receives estimated quotations for the selected service.
+**Method:** POST
+**Use Cases:** Arjun receives estimated quotations for the selected service.
 <details>
 <summary><a href="../Example-schemas/04_on_select/ev-charging-on_select.json">Example json :rocket:</a></summary>
 
@@ -510,8 +535,8 @@ The charging session will terminate when the ₹450.00 cost limit is reached, or
 </details>
 
 **11.1.2.5. action: init**
-* **Method:** POST
-* **Use Cases:** Arjun provides his billing information.
+**Method:** POST
+**Use Cases:** Arjun provides his billing information.
 <details>
 <summary><a href="../Example-schemas/05_init/ev-charging-init-bpp.json">Example json :rocket:</a></summary>
 
@@ -654,8 +679,8 @@ The PaymentSettlement schema extends the Payment object with an array of settlem
 4.Payment URL - URL for payment processing/redirection
 
 **11.1.2.6. action: on_init**
-* **Method:** POST
-* **Use Cases:** Arjun receives the charging session terms (rate, idle fee window, cancellation rules, payment terms etc). He reviews the terms. He chooses UPI and authorizes payment.
+**Method:** POST
+**Use Cases:** Arjun receives the charging session terms (rate, idle fee window, cancellation rules, payment terms etc). He reviews the terms. He chooses UPI and authorizes payment.
 <details>
 <summary><a href="../Example-schemas/06_on_init/ev-charging-on_init-bpp.json">Example json :rocket:</a></summary>
 
@@ -808,8 +833,8 @@ The PaymentSettlement schema extends the Payment object with an array of settlem
 > **Note:** UPI-Native Payment Architecture To ensure seamless user experiences and reduced operational complexity, the Unified Bharat E-Charge (UBC) ecosystem implements a direct, redirection-less UPI payment flow. In this model, when a user initiates a transaction, the BPP retrieves a dynamically generated UPI intent link from the CPO’s payment gateway and relays it to the client application. The user confirms payment via any UPI app, which pushes funds directly to the CPO’s merchant VPA. The payment gateway then verifies the credit in real-time with the UPI network and confirms the success to the BPP, enabling immediate booking authorization and faster, multi-cycle daily settlements without traditional gateway redirections
 
 **11.1.2.6.1. action: on_status**
-* **Method:** POST
-* **Use Cases:** Application then receives a notification on the completed status of the payment for the charging session.
+**Method:** POST
+**Use Cases:** Application then receives a notification on the completed status of the payment for the charging session.
 <details>
 <summary><a href="../Example-schemas/06_on_status_1/ev-charging-on_status-bpp.json">Example json :rocket:</a></summary>
 
@@ -938,8 +963,8 @@ The PaymentSettlement schema extends the Payment object with an array of settlem
 </details>
 
 **11.1.2.7. action: confirm**
-* **Method:** POST
-* **Use Cases:** Arjun confirms the order.
+**Method:** POST
+**Use Cases:** Arjun confirms the order.
 <details>
 <summary><a href="../Example-schemas/07_confirm/ev-charging-confirm.json">Example json :rocket:</a></summary>
 
@@ -1068,8 +1093,8 @@ The PaymentSettlement schema extends the Payment object with an array of settlem
 </details>
 
 **11.1.2.8. action: on_confirm**
-* **Method:** POST
-* **Use Cases:** The application then returns a booking/transaction ID along with the other charging session details.
+**Method:** POST
+**Use Cases:** The application then returns a booking/transaction ID along with the other charging session details.
 <details>
 <summary><a href="../Example-schemas/08_00_on_confirm/ev-charging-on_confirm.json">Example json :rocket:</a></summary>
 
@@ -1211,8 +1236,8 @@ The PaymentSettlement schema extends the Payment object with an array of settlem
 </details>
 
 **11.1.2.8.1 action: status**
-* **Method:** POST
-* **Use Cases:** Arjun is asked to plug in the charger by the application.
+**Method:** POST
+**Use Cases:** Arjun is asked to plug in the charger by the application.
 <details>
 <summary><a href="../Example-schemas/08_01_status/ev-charging-connector-status.json">Example json :rocket:</a></summary>
 
@@ -1340,8 +1365,8 @@ The PaymentSettlement schema extends the Payment object with an array of settlem
 </details>
 
 **11.1.2.8.2 action: on_status**
-* **Method:** POST
-* **Use Cases:** The application recieves a notification that the gun is successfully connected to the vehicle.
+**Method:** POST
+**Use Cases:** The application recieves a notification that the gun is successfully connected to the vehicle.
 <details>
 <summary><a href="../Example-schemas/08_02_on_status/ev-charging-connector-on_status.json">Example json :rocket:</a></summary>
 
@@ -1470,8 +1495,8 @@ The PaymentSettlement schema extends the Payment object with an array of settlem
 </details>
 
 **11.1.2.9. action: update (start charging)**
-* **Method:** POST
-* **Use Cases:** Arjun plugs in and starts the session from the app.
+**Method:** POST
+**Use Cases:** Arjun plugs in and starts the session from the app.
 <details>
 <summary><a href="../Example-schemas/09_update/ev-charging-start-update.json">Example json :rocket:</a></summary>
 
@@ -1599,8 +1624,8 @@ The PaymentSettlement schema extends the Payment object with an array of settlem
 </details>
 
 **11.1.2.10. action: on_update (start charging)**
-* **Method:** POST
-* **Use Cases:** Response for the charging session initiation.
+**Method:** POST
+**Use Cases:** Response for the charging session initiation.
 <details>
 <summary><a href="../Example-schemas/10_on_update/ev-charging-start-on_update.json">Example json :rocket:</a></summary>
 
@@ -1728,8 +1753,8 @@ The PaymentSettlement schema extends the Payment object with an array of settlem
 </details>
 
 **11.1.2.11. action: track (charging-session progress)**
-* **Method:** POST
-* **Use Cases:** Arjun requests to track the live status of the charging session. state of charge (how much charging has been done).
+**Method:** POST
+**Use Cases:** Arjun requests to track the live status of the charging session. state of charge (how much charging has been done).
 <details>
 <summary><a href="../Example-schemas/11_track/ev-charging-track.json">Example json :rocket:</a></summary>
 
@@ -1778,8 +1803,8 @@ The PaymentSettlement schema extends the Payment object with an array of settlem
 </details>
 
 **11.1.2.12. action: on_track**
-* **Method:** POST
-* **Use Cases:** Arjun receives the state of charge (how much charging has been done) of the vehicle.
+**Method:** POST
+**Use Cases:** Arjun receives the state of charge (how much charging has been done) of the vehicle.
 <details>
 <summary><a href="../Example-schemas/12_on_track/ev-charging-on_track.json">Example json :rocket:</a></summary>
 
@@ -1908,8 +1933,8 @@ The PaymentSettlement schema extends the Payment object with an array of settlem
 </details>
 
 **11.1.2.13. async action: on_update (stop-charging)**
-* **Method:** POST
-* **Use Case:** For the paid amount the session stops (or notifies the EV user to unplug). He receives a digital invoice and session summary in-app. If anything went wrong (e.g., session interrupted, SOC reaches 100%, etc.), the app reconciles to bill only for energy delivered and issues any adjustment or refund automatically.
+**Method:** POST
+**Use Case:** For the paid amount the session stops (or notifies the EV user to unplug). He receives a digital invoice and session summary in-app. If anything went wrong (e.g., session interrupted, SOC reaches 100%, etc.), the app reconciles to bill only for energy delivered and issues any adjustment or refund automatically.
 <details>
 <summary><a href="../Example-schemas/14_02_on_update/ev-charging-completed-on_update.json">Example json :rocket:</a></summary>
 
@@ -2035,8 +2060,8 @@ The PaymentSettlement schema extends the Payment object with an array of settlem
 </details>
 
 **11.1.2.14. action: rating**
-* **Method:** POST
-* **Use Cases:** Arjun provides rating for the charging session.
+**Method:** POST
+**Use Cases:** Arjun provides rating for the charging session.
 <details>
 <summary><a href="../Example-schemas/15_rating/ev-charging-rating.json">Example json :rocket:</a></summary>
 
@@ -2084,8 +2109,8 @@ The PaymentSettlement schema extends the Payment object with an array of settlem
 </details>
 
 **11.1.2.15. action: on_rating**
-* **Method:** POST
-* **Use Cases:** Arjun receives an achievement after providing a rating.
+**Method:** POST
+**Use Cases:** Arjun receives an achievement after providing a rating.
 <details>
 <summary><a href="../Example-schemas/16_on_rating/ev-charging-on_rating.json">Example json :rocket:</a></summary>
 
@@ -2120,8 +2145,8 @@ The PaymentSettlement schema extends the Payment object with an array of settlem
 </details>
 
 **11.1.2.16. action: support**
-* **Method:** POST
-* **Use Cases:** Arjun reaches out for support.
+**Method:** POST
+**Use Cases:** Arjun reaches out for support.
 <details>
 <summary><a href="../Example-schemas/17_support/ev-charging-support.json">Example json :rocket:</a></summary>
 
@@ -2162,8 +2187,8 @@ The PaymentSettlement schema extends the Payment object with an array of settlem
 </details>
 
 **11.1.2.17. action: on_support**
-* **Method:** POST
-* **Use Cases:** Arjun receives a response to his support request.
+**Method:** POST
+**Use Cases:** Arjun receives a response to his support request.
 <details>
 <summary><a href="../Example-schemas/18_on_support/ev-charging-on_support.json">Example json :rocket:</a></summary>
 
@@ -2204,10 +2229,17 @@ The PaymentSettlement schema extends the Payment object with an array of settlem
 ```
 </details>
 
-### 11.2. User Story – 2 - Reservation of an EV charging time slot
+## 11.2. User Story – 2 - Reservation of an EV charging time slot
+<span id="132-use-case-2--reservation-of-an-ev-charging-time-slot"></span>
 This section covers advance reservation of a charging slot where users discover and book a charger before driving to the location.
 
-#### 11.2.1. Consumer User Journey
+### 11.2.1. Consumer User Journey
+<span id="13201-context"></span>
+<span id="13202-discovery"></span>
+<span id="132021-adam-discovers-nearby-charging-services"></span>
+<span id="13203-order-reservation"></span>
+<span id="13204-fulfilment-session-start--tracking"></span>
+<span id="13205-post-fulfilment"></span>
 Aisha is driving her electric vehicle along the highway when she notices that her battery level is getting low. Using an EV Charging application (BAP), Aisha discovers nearby charging stations that are compatible with her vehicle. The application retrieves available slots and charger specifications from the available provider's (BPP). Aisha selects a preferred charger and books a slot through the application via Beckn APIs to avoid waiting on arrival.
 
 **Discovery and Selection:**
@@ -2259,11 +2291,48 @@ Charging auto-stops when the requested amount (₹500) is reached or when she ma
 Satisfied, Aisha resumes her trip with time to spare.
 
 #### 11.2.2. API Calls and Schema
+<span id="1321-api-calls-and-schema"></span>
+<span id="13211-action-discover"></span>
+<span id="132111-discovery-of-ev-charging-services-within-a-circular-boundary"></span>
+<span id="132112-discovery-within-circle--connector-specs-as-filters"></span>
+<span id="132113-discovery-within-circle--vehicle-specifications-as-filters"></span>
+<span id="132114-discovery-of-services-offered-by-a-specific-cpo"></span>
+<span id="132115-viewing-details-of-a-single-charging-station-by-its-item-identifier"></span>
+<span id="132116-fetching-details-of-a-specific-charger-evse-on-site-by-its-evse-identifier"></span>
+<span id="132117-discovering-chargers-in-a-specific-circular-area-a-specific-connector-type-and-availability-time-range"></span>
+<span id="13212-action-on_discover"></span>
+<span id="132121-offers-as-part-of-the-catalog"></span>
+<span id="13213-action-select"></span>
+<span id="13214-action-on_select"></span>
+<span id="132141-surge-pricing"></span>
+<span id="13215-action-init"></span>
+<span id="13216-action-on_init"></span>
+<span id="13217-action-on_status-payment"></span>
+<span id="13218-action-confirm"></span>
+<span id="13219-action-on_confirm"></span>
+<span id="132110-action-update-start-charging"></span>
+<span id="132111-action-on_update-start-charging"></span>
+<span id="132112-action-status"></span>
+<span id="132113-action-on_status"></span>
+<span id="132114-asynchronous-action-on_status-temporary-connection-interruption"></span>
+<span id="13211401-aundercharge-power-cut-mid-session"></span>
+<span id="13211402-b-overcharge-charger-offline-to-cms-keeps-dispensing"></span>
+<span id="132115-asynchronous-action-on_update-stop-charging"></span>
+<span id="132116-synchronousasynchronous-on_update-stop-charging"></span>
+<span id="132117-action-cancel"></span>
+<span id="132118-action-on_cancel"></span>
+<span id="132119-action-rating"></span>
+<span id="132120-action-on_rating"></span>
+<span id="132121-action-support"></span>
+<span id="132122-action-on_support"></span>
+<span id="1322-integrating-with-your-software"></span>
+<span id="13221-integrating-the-bap"></span>
+<span id="13222-integrating-the-bpp"></span>
 > **Note:** The API calls and schema for reservation follow a similar flow to walk-in but include specific checks for availability and slot booking.*
 
 **11.2.2.1. action: discover**
-* **Method:** POST
-* **Use Cases:** Aisha searches for chargers with specific filters (Location, Connector type and a time slot).
+**Method:** POST
+**Use Cases:** Aisha searches for chargers with specific filters (Location, Connector type and a time slot).
 <details>
 <summary><a href="../Example-schemas/01_discover/discovery-within-a-timerange.json">Example json :rocket:</a></summary>
 
@@ -2309,8 +2378,8 @@ Satisfied, Aisha resumes her trip with time to spare.
 </details>
 
 **11.2.2.2. action: on_discover**
-* **Method:** POST
-* **Use Cases:** The app receives a list of charging stations matching criteria, including ETA, availability, and active offers.
+**Method:** POST
+**Use Cases:** The app receives a list of charging stations matching criteria, including ETA, availability, and active offers.
 <details>
 <summary><a href="../Example-schemas/02_on_discover/ev-charging-on_discover.json">Example json :rocket:</a></summary>
 
@@ -2724,8 +2793,8 @@ Satisfied, Aisha resumes her trip with time to spare.
 </details>
 
 **11.2.2.3. action: select**
-* **Method:** POST
-* **Use Cases:** Aisha selects "EcoPower Highway Hub" and chooses a time slot (12:45–1:15 PM).
+**Method:** POST
+**Use Cases:** Aisha selects "EcoPower Highway Hub" and chooses a time slot (12:45–1:15 PM).
 <details>
 <summary><a href="../Example-schemas/03_select/ev-charging-on_select.json">Example json :rocket:</a></summary>
 
@@ -2812,8 +2881,8 @@ Satisfied, Aisha resumes her trip with time to spare.
 </details>
 
 **11.2.2.4. action: on_select**
-* **Method:** POST
-* **Use Cases:** The app returns the specific terms for that slot (Tariff, Grace Period, Cancellation Rules).
+**Method:** POST
+**Use Cases:** The app returns the specific terms for that slot (Tariff, Grace Period, Cancellation Rules).
 <details>
 <summary><a href="../Example-schemas/04_on_select/ev-charging-select.json">Example json :rocket:</a></summary>
 
@@ -2951,8 +3020,8 @@ Satisfied, Aisha resumes her trip with time to spare.
 </details>
 
 **11.2.2.5. action: init**
-* **Method:** POST
-* **Use Cases:** Aisha provides her billing information (Credit Card details) for the ₹500 payment.
+**Method:** POST
+**Use Cases:** Aisha provides her billing information (Credit Card details) for the ₹500 payment.
 <details>
 <summary><a href="../Example-schemas/05_init/ev-charging-init-bpp.json">Example json :rocket:</a></summary>
 
@@ -3086,8 +3155,8 @@ Satisfied, Aisha resumes her trip with time to spare.
 </details>
 
 **11.2.2.6. action: on_init**
-* **Method:** POST
-* **Use Cases:** The app presents the final payment terms and awaits authorization.
+**Method:** POST
+**Use Cases:** The app presents the final payment terms and awaits authorization.
 <details>
 <summary><a href="../Example-schemas/06_on_init/ev-charging-on_init-bpp.json">Example json :rocket:</a></summary>
 
@@ -3238,8 +3307,8 @@ Satisfied, Aisha resumes her trip with time to spare.
 </details>
 
 **11.2.2.6.1. action: on_status**
-* **Method:** POST
-* **Use Cases:** Application receives a notification on the completed status of the payment for the reservation.
+**Method:** POST
+**Use Cases:** Application receives a notification on the completed status of the payment for the reservation.
 <details>
 <summary><a href="../Example-schemas/06_on_status_1/ev-charging-on_status-bpp.json">Example json :rocket:</a></summary>
 
@@ -3368,8 +3437,8 @@ Satisfied, Aisha resumes her trip with time to spare.
 </details>
 
 **11.2.2.7. action: confirm**
-* **Method:** POST
-* **Use Cases:** Aisha confirms the reservation order.
+**Method:** POST
+**Use Cases:** Aisha confirms the reservation order.
 <details>
 <summary><a href="../Example-schemas/07_confirm/ev-charging-confirm.json">Example json :rocket:</a></summary>
 
@@ -3498,8 +3567,8 @@ Satisfied, Aisha resumes her trip with time to spare.
 </details>
 
 **11.2.2.8. action: on_confirm**
-* **Method:** POST
-* **Use Cases:** The application returns a unique Reservation ID confirming the slot is booked.
+**Method:** POST
+**Use Cases:** The application returns a unique Reservation ID confirming the slot is booked.
 <details>
 <summary><a href="../Example-schemas/08_00_on_confirm/ev-charging-on_confirm.json">Example json :rocket:</a></summary>
 
@@ -3641,8 +3710,8 @@ Satisfied, Aisha resumes her trip with time to spare.
 </details>
 
 **11.2.2.9. action: status**
-* **Method:** POST
-* **Use Cases:** Upon arrival, Aisha confirms she is at the right charger, the application checks the status of the reserved charger.
+**Method:** POST
+**Use Cases:** Upon arrival, Aisha confirms she is at the right charger, the application checks the status of the reserved charger.
 <details>
 <summary><a href="../Example-schemas/08_01_status/ev-charging-connector-status.json">Example json :rocket:</a></summary>
 
@@ -3770,8 +3839,8 @@ Satisfied, Aisha resumes her trip with time to spare.
 </details>
 
 **11.2.2.10. action: on_status**
-* **Method:** POST
-* **Use Cases:** The application confirms the charger is ready and prompts Aisha to "Start Charging" in the app.
+**Method:** POST
+**Use Cases:** The application confirms the charger is ready and prompts Aisha to "Start Charging" in the app.
 <details>
 <summary><a href="../Example-schemas/08_02_on_status/ev-charging-connector-on_status.json">Example json :rocket:</a></summary>
 
@@ -3900,8 +3969,8 @@ Satisfied, Aisha resumes her trip with time to spare.
 </details>
 
 **11.2.2.11. action: update (start charging)**
-* **Method:** POST
-* **Use Cases:** Aisha taps "Start Charging" and the app instructs the backend to energize the gun.
+**Method:** POST
+**Use Cases:** Aisha taps "Start Charging" and the app instructs the backend to energize the gun.
 <details>
 <summary><a href="../Example-schemas/09_update/ev-charging-start-update.json">Example json :rocket:</a></summary>
 
@@ -4029,8 +4098,8 @@ Satisfied, Aisha resumes her trip with time to spare.
 </details>
 
 **11.2.2.12. action: on_update (start charging)**
-* **Method:** POST
-* **Use Cases:** Response confirming the session has started successfully.
+**Method:** POST
+**Use Cases:** Response confirming the session has started successfully.
 <details>
 <summary><a href="../Example-schemas/10_on_update/ev-charging-start-on_update.json">Example json :rocket:</a></summary>
 
@@ -4158,8 +4227,8 @@ Satisfied, Aisha resumes her trip with time to spare.
 </details>
 
 **11.2.2.13. action: track (charging-session progress)**
-* **Method:** POST
-* **Use Cases:** Aisha requests live telemetry (Energy dispensed, running cost) while at lunch.
+**Method:** POST
+**Use Cases:** Aisha requests live telemetry (Energy dispensed, running cost) while at lunch.
 <details>
 <summary><a href="../Example-schemas/11_track/ev-charging-track.json">Example json :rocket:</a></summary>
 
@@ -4208,8 +4277,8 @@ Satisfied, Aisha resumes her trip with time to spare.
 </details>
 
 **11.2.2.14. action: on_track**
-* **Method:** POST
-* **Use Cases:** The app receives real-time updates on the charging progress.
+**Method:** POST
+**Use Cases:** The app receives real-time updates on the charging progress.
 <details>
 <summary><a href="../Example-schemas/12_on_track/ev-charging-on_track.json">Example json :rocket:</a></summary>
 
@@ -4338,8 +4407,8 @@ Satisfied, Aisha resumes her trip with time to spare.
 </details>
 
 **11.2.2.15. async action: on_update (stop-charging)**
-* **Method:** POST
-* **Use Case:** The session terminates. Aisha receives the digital invoice and updated wallet balance.
+**Method:** POST
+**Use Case:** The session terminates. Aisha receives the digital invoice and updated wallet balance.
 <details>
 <summary><a href="../Example-schemas/14_02_on_update/ev-charging-completed-on_update.json">Example json :rocket:</a></summary>
 
@@ -4465,8 +4534,8 @@ Satisfied, Aisha resumes her trip with time to spare.
 </details>
 
 **11.2.2.16. action: rating**
-* **Method:** POST
-* **Use Cases:** Aisha provides a rating for the amenities and experience.
+**Method:** POST
+**Use Cases:** Aisha provides a rating for the amenities and experience.
 <details>
 <summary><a href="../Example-schemas/15_rating/ev-charging-rating.json">Example json :rocket:</a></summary>
 
@@ -4514,8 +4583,8 @@ Satisfied, Aisha resumes her trip with time to spare.
 </details>
 
 **11.2.2.17. action: on_rating**
-* **Method:** POST
-* **Use Cases:** Aisha receives an acknowledgement for her feedback.
+**Method:** POST
+**Use Cases:** Aisha receives an acknowledgement for her feedback.
 <details>
 <summary><a href="../Example-schemas/16_on_rating/ev-charging-on_rating.json">Example json :rocket:</a></summary>
 
@@ -4550,8 +4619,8 @@ Satisfied, Aisha resumes her trip with time to spare.
 </details>
 
 **11.2.2.18. action: support**
-* **Method:** POST
-* **Use Cases:** Aisha reaches out for support if needed.
+**Method:** POST
+**Use Cases:** Aisha reaches out for support if needed.
 <details>
 <summary><a href="../Example-schemas/17_support/ev-charging-support.json">Example json :rocket:</a></summary>
 
@@ -4592,8 +4661,8 @@ Satisfied, Aisha resumes her trip with time to spare.
 </details>
 
 **11.2.2.19. action: on_support**
-* **Method:** POST
-* **Use Cases:** Aisha receives a response to her support request.
+**Method:** POST
+**Use Cases:** Aisha receives a response to her support request.
 <details>
 <summary><a href="../Example-schemas/18_on_support/ev-charging-on_support.json">Example json :rocket:</a></summary>
 
