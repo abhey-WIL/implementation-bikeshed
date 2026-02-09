@@ -13,11 +13,16 @@ jobs:
       - name: Checkout UBC Repo
         uses: actions/checkout@v4
 
-      - name: Build with Bikeshed
-        uses: speced/bikeshed@v1.1.0
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
-          input: index.bs
-          output: index.html
+          python-version: '3.x'
+
+      - name: Install and build with Bikeshed
+        run: |
+          pip install bikeshed
+          bikeshed update
+          bikeshed spec index.bs index.html
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
