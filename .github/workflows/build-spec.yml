@@ -1,0 +1,27 @@
+name: Manual-Trigger Spec Build
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: # Adds a "Run workflow" button in GitHub UI
+
+jobs:
+  prepare-and-build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout UBC Repo
+        uses: actions/checkout@v4
+
+      - name: Build with Bikeshed
+        uses: speced/bikeshed@v1.1.0
+        with:
+          input: index.bs
+          output: index.html
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: .
+          publish_branch: gh-pages

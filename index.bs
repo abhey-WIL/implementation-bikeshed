@@ -1,0 +1,27 @@
++ <pre class="metadata">
++ Title: Implementation Guide = EV Charging  Unified Bharat e-Charge
++ Shortname: ubc-ev-charging
++ Status: ED
++ Group: NBSL
++ Markup Shorthands: markdown yes
++ No Toc: yes
++ </pre>
++ 
++ <!--
++   This spec is composed from:
++   - MDs/ev-charging-head.md 
++   - new-content.md          
++   - MDs/ev-charging-tail.md
++ 
++   Upstream source (frozen copy downloaded once):
++   https://github.com/beckn/DEG/blob/main/docs/implementation-guides/v2/EV_Charging/EV_Charging.md
++ -->
++ 
++ <section data-include="MDs/ev-charging-head.md" data-include-format="markdown">
++ </section>
++ 
++ <section data-include="new-content.md" data-include-format="markdown">
++ </section>
++ 
++ <section data-include="MDs/ev-charging-tail.md" data-include-format="markdown">
++ </section>
