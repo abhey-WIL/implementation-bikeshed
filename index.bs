@@ -3,7 +3,11 @@ Title: Implementation Guide – EV Charging – Unified Bharat e-Charge
 Shortname: ubc-ev-charging
 Status: LS
 
-Boilerplate: "none"
+Boilerplate: omit conformance true
+Boilerplate: omit feedback-header true
+Boilerplate: omit references true
+Boilerplate: omit copyright true
+Boilerplate: omit status true
 
 Abstract: Unified Bharat e-Charge implementation guide for Beckn based EV charging.
 
