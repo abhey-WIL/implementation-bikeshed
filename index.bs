@@ -5,12 +5,6 @@ Status: LS
 Markup Shorthands: markdown yes  
 </pre>
 
-<section id="abstract">
-
-This document defines the Unified Bharat e-Charge implementation guide for EV charging interoperability within the Beckn ecosystem.
-
-</section>
-
 <section data-include="MDs/ev-charging-head.md" data-include-format="markdown"></section>
 
 <section data-include="new-content.md" data-include-format="markdown"></section>
