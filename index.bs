@@ -1,15 +1,16 @@
 <pre class="metadata">
-Title: Implementation Guide - EV Charging - Unified Bharat e-Charge
-Shortname: ubc-ev-charging
-Status: UD
-Markup Shorthands: markdown yes
+Title: Implementation Guide – EV Charging – Unified Bharat e-Charge  
+Shortname: ubc-ev-charging  
+Status: DRAFT  
+Markup Shorthands: markdown yes  
 </pre>
 
-<section data-include="MDs/ev-charging-head.md" data-include-format="markdown">
+<section id="abstract" data-format="markdown">
+This document provides implementation guidance for EV charging interoperability under Unified Bharat e-Charge.
 </section>
 
-<section data-include="new-content.md" data-include-format="markdown">
-</section>
+<section data-include="MDs/ev-charging-head.md" data-include-format="markdown"></section>
 
-<section data-include="MDs/ev-charging-tail.md" data-include-format="markdown">
-</section>
+<section data-include="new-content.md" data-include-format="markdown"></section>
+
+<section data-include="MDs/ev-charging-tail.md" data-include-format="markdown"></section>
