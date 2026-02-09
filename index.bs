@@ -4,16 +4,11 @@ Shortname: ubc-ev-charging
 Status: LS
 
 Boilerplate: "none"
-Local Boilerplate: true
 
 Abstract: Unified Bharat e-Charge implementation guide for Beckn based EV charging.
 
 Markup Shorthands: markdown yes
 </pre>
-
-<section>
-<h1>Implementation Guide – EV Charging</h1>
-</section>
 
 <section data-include="MDs/ev-charging-head.md" data-include-format="markdown"></section>
 
