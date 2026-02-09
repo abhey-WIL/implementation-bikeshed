@@ -10,12 +10,12 @@ Markup Shorthands: markdown yes
 
 <section data-format="markdown">
 
-# Implementation Guide – EV Charging – Unified Bharat e-Charge
+# Implementation Guide – EV Charging – Unified Bharat e-Charge {#ubc-ev-charging}
 
-<pre class="include" data-include="MDs/ev-charging-head.md"></pre>
+<pre class="include" path="MDs/ev-charging-head.md"></pre>
 
-<pre class="include" data-include="new-content.md"></pre>
+<pre class="include" path="new-content.md"></pre>
 
-<pre class="include" data-include="MDs/ev-charging-tail.md"></pre>
+<pre class="include" path="MDs/ev-charging-tail.md"></pre>
 
 </section>
