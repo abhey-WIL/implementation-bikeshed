@@ -2,6 +2,9 @@
 Title: Implementation Guide – EV Charging – Unified Bharat e-Charge  
 Shortname: ubc-ev-charging  
 Status: LS  
+
+Abstract: This document defines the Unified Bharat e-Charge implementation guide for EV charging interoperability within the Beckn ecosystem.
+
 Markup Shorthands: markdown yes  
 </pre>
 
