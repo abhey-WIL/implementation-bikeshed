@@ -5,6 +5,9 @@ on:
     branches: [main]
   workflow_dispatch: # Adds a "Run workflow" button in GitHub UI
 
+permissions:
+  contents: write
+
 jobs:
   prepare-and-build:
     runs-on: ubuntu-latest
