@@ -8,17 +8,14 @@ Abstract: Unified Bharat e-Charge implementation guide for Beckn based EV chargi
 Markup Shorthands: markdown yes
 </pre>
 
-<section id="content" data-format="markdown">
+<section data-format="markdown">
 
 # Implementation Guide – EV Charging – Unified Bharat e-Charge
 
-::: include MDs/ev-charging-head.md
-:::
+<pre class="include" data-include="MDs/ev-charging-head.md"></pre>
 
-::: include new-content.md
-:::
+<pre class="include" data-include="new-content.md"></pre>
 
-::: include MDs/ev-charging-tail.md
-:::
+<pre class="include" data-include="MDs/ev-charging-tail.md"></pre>
 
 </section>
