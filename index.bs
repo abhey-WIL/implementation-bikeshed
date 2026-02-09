@@ -1,7 +1,7 @@
 <pre class="metadata">
 Title: Implementation Guide – EV Charging – Unified Bharat e-Charge  
 Shortname: ubc-ev-charging  
-Status: DRAFT  
+Status: base  
 Markup Shorthands: markdown yes  
 </pre>
 
