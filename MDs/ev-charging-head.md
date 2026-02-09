@@ -6,7 +6,7 @@ Implementation Guide \- EV Charging \- Version 0.8 (DRAFT) <!-- omit from toc --
 - [1. Request for Comments](#1-request-for-comments)
 - [2. Copyright Notice](#2-copyright-notice)
 - [3. Status of This Memo](#3-status-of-this-memo)
-- [4. Abstract](#4-abstract)
+- &bs[4. Abstract](#4-abstract)
 - [5. Introduction](#5-introduction)
 - [6. Scope](#6-scope)
 - [7. Intended Audience](#7-intended-audience)
